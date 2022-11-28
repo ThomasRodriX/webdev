@@ -1,73 +1,107 @@
+ 
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes DM</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
-<body>
-    <div class="wrapper">
-        <div class="title">Mes DM</div>
-        <div class="form">
-            <div class="bot-inbox inbox">
-                <div class="icon">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="msg-header">
-                    <p>Dites ce qui vous passe par la tête ! </p>
-                </div>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+ 
+        <title>Tuts+ Chat Application</title>
+        <meta name="description" content="chatbox" />
+    </head>
+    <body>
+    <?php
+    // connect to postgresql
+    $user = "grp47oxh6hjegww"; 
+    $password = "99yXmThpFno";
+    $host = "https://pga.esilv.olfsoftware.fr/";
+    $port = "5432";
+    $dbname = "pggrp4";
+    //$myPDO = new PDO("pgsql:host=$host;dbname=$dbname', $user, $password");
+    $connect = pg_connect("host=$host dbname=$dbname user=$user password=$password");
+
+    if(!$connect){
+	    echo "Unable to connect to the database.";
+    } 
+
+    if(!isset($_GET['id'])) // vérifie si id est dans l'url du client est dans l'url
+    {
+        header('location:menu.php');
+    }
+    else {
+        $user_id = $_GET['id']; 
+        if(isset($_GET['convId'])){ // check si conversation id est dans l'url
+	        $convId = $_GET['convId'];
+        }
+        else{
+	        header('location:dm_menu.php?id='.$user_id);
+        }
+
+    ?>
+        <div id="wrapper">
+            <div id="menu">
+                <p class="welcome">Heureux de vous voir, <b><?php echo $user_id; ?></b></p>
+                <p><a id="retour_menu_dm" href="#">Retourner au conversatiosn</a></p>
             </div>
-        </div>
-        <div class="typing-field">
-            <div class="input-data">
-                <input id="data" type="text" placeholder="Ecrivez quelque chose .." required>
-                <button id="send-btn">Envoyer</button>
+ 
+            <div id="chatbox">
+            <?php
+            /*
+            // récupération des anciens messages si ils existent dans $result
+
+            // A ENLEVER DES COMMENTAIRES LORSQUE CONNeCTION à la BDD 
+
+            
+            $oldMessages = pg_query($connect, "SELECT sender_id,text  FROM messages WHERE convo_id = $convId");
+
+	        while ($row = pg_fetch_row($oldMessages)) {
+		        echo "Sender ID: $row[0]  Message: $row[1]";
+		        echo "<br />\n";
+            }
+            */
+            ?>
+            
             </div>
+ 
+            <form name="message" action="">
+                <input name="usermsg" type="text" id="usermsg" />
+                <input name="envoiMsg" type="submit" id="envoiMsg" value="Envoyer" />
+            </form>
         </div>
-    </div>
-    <script>
-        $(document).ready(function(){
-            $("#send-btn").on("click", function(){
-                $value = $("#data").val();
-                $msg = '<div class="user-inbox inbox"><div class="msg-header"><p>'+ $value +'</p></div></div>';
-                $(".form").append($msg);
-                $("#data").val('');
-                
-                // ajax code
-                $.ajax({
-                    url: 'message.php',
-                    type: 'POST',
-                    data: 'text='+$value,
-                    success: function(result){
-                        $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>'+ result +'</p></div></div>';
-                        $(".form").append($replay);
-                        $(".form").scrollTop($(".form")[0].scrollHeight);
-                    }
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            // jQuery Document
+            $(document).ready(function () {
+                $("#envoiMsg").click(function () {
+                    var clientmsg = $("#usermsg").val();
+                    $.post("post.php", { text: clientmsg });
+                    $("#usermsg").val("");
+                    return false;
                 });
+ 
+                function loadLog() {
+                    var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll 
+ 
+                    $.ajax({
+                        url: "log.html",
+                        cache: false,
+                        success: function (html) {
+                            $("#chatbox").html(html); // ajoute le msg dans la chatbox
+ 
+                            //Auto-scroll           
+                            var newscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll 
+                            if(newscrollHeight > oldscrollHeight){
+                                $("#chatbox").animate({ scrollTop: newscrollHeight }, 'normal'); //Autoscroll jusuq'au dernier msg
+                            }   
+                        }
+                    });
+                }
+ 
+                setInterval (loadLog, 2500);
+ 
             });
-        });
-    </script>
-    
-</body>
-</html>
+        </script>
+    </body>
 
 <?php
-// connecting to database
-$conn = mysqli_connect("localhost", "root", "", "bot") or die("Database Error");
-// getting user message through ajax
-$getMesg = mysqli_real_escape_string($conn, $_POST['text']);
-//checking user query to database query
-$check_data = "SELECT replies FROM chatbot WHERE queries LIKE '%$getMesg%'";
-$run_query = mysqli_query($conn, $check_data) or die("Error");
-// if user query matched to database query we'll show the reply otherwise it go to else statement
-if(mysqli_num_rows($run_query) > 0){
-    //fetching replay from the database according to the user query
-    $fetch_data = mysqli_fetch_assoc($run_query);
-    //storing replay to a varible which we'll send to ajax
-    $replay = $fetch_data['replies'];
-    echo $replay;
-}else{
-    echo "Sorry can't be able to understand you!";
-}
+    }
 ?>
+</html>

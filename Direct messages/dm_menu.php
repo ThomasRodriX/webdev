@@ -11,7 +11,7 @@
         <div className="mes_conversations">
           <h2>Mes conversations</h2>
             <ul>
-                <?php foreach ($conv_id as $contact) : ?>
+                <?php foreach ($conv_id as $contact) : // affichage des conversations ?> 
                     <li>
                         <?= $contact['conv_id'] ?>
                     </li>
@@ -22,20 +22,29 @@
 </html>
 
 <?php
-$objetPdo = new PDO('mysql:host=localhost;dbname=twitter','root','root'); // a personnaliser
 
+if(!isset($_GET['id'])) // vérifie si id est dans l'url
+{
+    header('location:menu.php');
+}
+else {
+    $user_id = $_GET['id'];
+}
 
+// connect to postgresql
+$user = "grp47oxh6hjegww"; 
+$password = "99yXmThpFno";
+$host = "https://pga.esilv.olfsoftware.fr/";
+$port = "5432";
+$dbname = "pggrp4";
+//$myPDO = new PDO("pgsql:host=$host;dbname=$dbname', $user, $password");
+$connect = pg_connect("host=$host dbname=$dbname user=$user password=$password");
 
-curent_user = $_GET['user'] // id du user courant
+if(!$connect){
+    echo "Unable to connect to the database.";
+} 
 
-//recupération des conversations id
-$pdoStat = $objetPdo->prepare("SELECT 'id' FROM `conversations` WHERE 'user_0'='curent_user' OR 'user_1'='curent_user';
-VALUES ('$conv_id')");
-
-
-$executeIsOk = $pdoStat->execute();
-
-//recupération des résultats
-$conv_id = $pdoStat->fetchAll();
+// Récupération des conversations de l'utilisateur
+$conv_id = pg_query($connect, "SELECT conv_id FROM conversations WHERE user_id = $user_id");
 
 ?>
