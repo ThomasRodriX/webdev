@@ -1,6 +1,6 @@
  
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
  
@@ -12,11 +12,11 @@
     // connect to postgresql
     $user = "grp47oxh6hjegww"; 
     $password = "99yXmThpFno";
-    $host = "https://pga.esilv.olfsoftware.fr/";
+    $host = "esilv.olfsoftware.fr";
     $port = "5432";
     $dbname = "pggrp4";
-    //$myPDO = new PDO("pgsql:host=$host;dbname=$dbname', $user, $password");
-    $connect = pg_connect("host=$host dbname=$dbname user=$user password=$password");
+
+    $connect = pg_connect("host=$host port=5432 dbname=$dbname user=$user password=$password");
 
     if(!$connect){
 	    echo "Unable to connect to the database.";
@@ -38,37 +38,57 @@
     ?>
         <div id="wrapper">
             <div id="menu">
-                <p class="welcome">Heureux de vous voir, <b><?php echo $user_id; ?></b></p>
-                <p><a id="retour_menu_dm" href="#">Revenir aux conversations</a></p>
+                <p class="welcome">Heureux de vous revoir, <b><?php echo $user_id; ?></b></p>
+                <p><a id="retour_dm_menu" href="dm_menu.php">Revenir aux conversations</a></p>
             </div>
  
             <div id="chatbox">
             <?php
-            /*
-            // récupération des anciens messages si ils existent dans $result
-
-            // A ENLEVER DES COMMENTAIRES LORSQUE CONNeCTION à la BDD 
-
             
-            $oldMessages = pg_query($connect, "SELECT sender_id,text  FROM messages WHERE convo_id = $convId");
+            // récupération des anciens messages si ils existent dans $result
+            
 
+            $query = "SELECT * FROM webdev.messages WHERE convo_id = '".$convId."'";
+            //$query = "SELECT * FROM users WHERE email = '".$_POST['email']."' AND password = '$password_md5'";
+
+            $oldMessages = pg_query($connect, $query); 
+
+            $sender="";
 	        while ($row = pg_fetch_row($oldMessages)) {
-		        echo "Sender ID: $row[0]  Message: $row[1]";
+                if($row[2] == $user_id){
+                    $sender = "Vous";
+                }
+                else{
+                    $query = "SELECT user_0, user_1 FROM webdev.conversations WHERE id = '".$convId."'";
+                    $people = pg_query($connect, $query);
+                    $people = pg_fetch_row($people);
+                    if($people[0] == $user_id){
+                        $sender = $people[1];
+                    }
+                    else{
+                        $sender = $people[0];
+                    }
+                    $query = "SELECT username FROM webdev.users WHERE id = '".$sender."'";
+                    $sender = pg_query($connect, $query);
+                    $sender = pg_fetch_row($sender);
+                    $sender = $sender[0];
+                }
+		        echo "$sender :  Message: $row[3]";
 		        echo "<br />\n";
             }
-            */
+            
             ?>
             
             </div>
  
             <form name="message" action="">
                 <input name="usermsg" type="text" id="usermsg" />
-                <input name="envoiMsg" type="submit" id="envoiMsg" value="Envoyer" />
+                <input name="envoiMsg" type="submit" id="envoiMsg" value="Envoyer" onclick=send()/>
             </form>
         </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
-            // jQuery Document
+          // jQuery Document
             $(document).ready(function () {
                 $("#envoiMsg").click(function () {
                     var clientmsg = $("#usermsg").val();
@@ -76,10 +96,10 @@
                     $("#usermsg").val("");
                     return false;
                 });
- 
+
                 function anciens_msg() {
                     var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll 
- 
+                    /*
                     $.ajax({
                         url: "log.html",
                         cache: false,
@@ -93,15 +113,26 @@
                             }   
                         }
                     });
+                    */
                 }
- 
+
                 setInterval (anciens_msg, 2500);
  
             });
+        
         </script>
     </body>
 
 <?php
     }
+    /*
+    function send(){
+        $msg = htmlspecialchars($_POST['envoiMsg']);
+        
+        $newMessages = pg_query($connect, 'INSERT INTO webdev.messages VALUES (' $convId', '$id', '$text', '', 'NOW()')');
+        $result = pg_query($dbconn, $query);
+    } */
+    
+
 ?>
 </html>
