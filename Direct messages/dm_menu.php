@@ -35,32 +35,35 @@
                     $conv = pg_query($connect, $query);
 
                     // affichage des conversations
-
-                        //afficher les conversations
-                        
-
-                        //var_dump($conv);
-
-                        
-                        while ($row = pg_fetch_row($conv)) {
-
-                            // Récupérer le nom de l'autre utilisateur
+                    if(pg_num_rows($conv) != 0){
+                        while($row = pg_fetch_row($conv)){
                             if($row[1] == $user_id){
-                                $query = "SELECT username FROM webdev.users WHERE username = '".$row[2]."'";
-
+                                $vousId = $row[1];
+                                $pasVousId = $row[2];
                             }
                             else{
-                                $query = "SELECT username FROM webdev.users WHERE username = '".$row[1]."'";
+                                if($row[2] == $user_id){
+                                    $vousId = $row[2];
+                                    $pasVousId = $row[1];
+                                }
+                                else{
+                                    echo "Erreur";
+                                    $vousId = "Erreur";
+                                }
                             }
-                            $other_user = pg_query($connect, $query);
-                            $other_user = pg_fetch_row($other_user);
 
-                            //var_dump($row);
-                            //echo $row[2];
-                            echo "<li><a href='dm.php?id=".$user_id."&convId=".$row[0]."'>---".$other_user. "+" .$user_id."---</a>----$</li>";
+                            // récupère le usernamer de l'autre utilisateur
+                            $query = "SELECT username FROM webdev.users WHERE id = '".$pasVousId."'";
+                            $username = pg_query($connect, $query);
+                            $username = pg_fetch_row($username);
 
-                        } 
-                    
+                            echo "<li><a href='dm.php?id=".$user_id."&convId=".$row[0]."'>".$username[0]."</a></li>";
+                        }
+                          
+                    }
+                    else{
+                        echo "Vous n'avez pas de conversations";
+                    }                   
                       
                 ?>
             </ul>

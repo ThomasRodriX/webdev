@@ -54,6 +54,7 @@
 
             //$sender="";
 	        while ($row = pg_fetch_row($oldMessages)) {
+                $date = $row[5];
                 if($row[2] == $user_id){
                     $sender = "Vous";
                 }
@@ -72,7 +73,7 @@
                     $sender = pg_fetch_row($sender);
                     $sender = $sender[0];
                 }
-		        echo "$sender :  Message: $row[3]";
+		        echo "$date |  $sender :  $row[3]";
 		        echo "<br />\n";
             }
             
@@ -104,23 +105,21 @@
             echo "Unable to connect to the database.";
         }
         $id = $_GET['id'];
-
-        // check last message id
-        $query = "SELECT id FROM webdev.messages ORDER BY id DESC LIMIT 1";
-        $lastId = pg_query($connect, $query);
-        $lastId = pg_fetch_row($lastId);
-        $lastId = $lastId[0];
-        $lastId = $lastId + 1;
-
+        
         $time = time();
         $date = date("Y-m-d H:i:s", $time);
     
 
-        $query = "INSERT INTO webdev.messages VALUES ('$lastId', '$convId', '$id', '$text', null, '$date')";
+        $query = "INSERT INTO webdev.messages VALUES ('$time', '$convId', '$id', '$text', null, '$date')";
         $newMessages = pg_query($connect, $query);
+        if (!$newMessages) {
+            echo "Une erreur s'est produite.\n";
+            exit;
+        }
+        else{
+            header('location:dm.php?id='.$id.'&convId='.$convId);
+        }
     }
 
-    
-
-?>
+    ?>
 </html>
