@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
  
-        <title>Tuts+ Chat Application</title>
+        <title>chat DM</title>
         <meta name="description" content="chatbox" />
     </head>
     <body>
@@ -47,13 +47,12 @@
             
             // récupération des anciens messages si ils existent dans $result
             
-
             $query = "SELECT * FROM webdev.messages WHERE convo_id = '".$convId."'";
             //$query = "SELECT * FROM users WHERE email = '".$_POST['email']."' AND password = '$password_md5'";
 
             $oldMessages = pg_query($connect, $query); 
 
-            $sender="";
+            //$sender="";
 	        while ($row = pg_fetch_row($oldMessages)) {
                 if($row[2] == $user_id){
                     $sender = "Vous";
@@ -81,57 +80,46 @@
             
             </div>
  
-            <form name="message" action="">
+            <form method="post">
                 <input name="usermsg" type="text" id="usermsg" />
-                <input name="envoiMsg" type="submit" id="envoiMsg" value="Envoyer" onclick=send()/>
+                <p><input type="submit" value="Envoyer"></p>
             </form>
         </div>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript">
-          // jQuery Document
-            $(document).ready(function () {
-                $("#envoiMsg").click(function () {
-                    var clientmsg = $("#usermsg").val();
-                    $.post("post.php", { text: clientmsg });
-                    $("#usermsg").val("");
-                    return false;
-                });
-
-                function anciens_msg() {
-                    var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll 
-                    /*
-                    $.ajax({
-                        url: "log.html",
-                        cache: false,
-                        success: function (html) {
-                            $("#chatbox").html(html); // ajoute le msg dans la chatbox
- 
-                            //Auto-scroll           
-                            var newscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll 
-                            if(newscrollHeight > oldscrollHeight){
-                                $("#chatbox").animate({ scrollTop: newscrollHeight }, 'normal'); //Autoscroll jusuq'au dernier msg
-                            }   
-                        }
-                    });
-                    */
-                }
-
-                setInterval (anciens_msg, 2500);
- 
-            });
-        
-        </script>
     </body>
 
-<?php
+    <?php
     }
-    /*
-    function send(){
-        $msg = htmlspecialchars($_POST['envoiMsg']);
-        
-        $newMessages = pg_query($connect, 'INSERT INTO webdev.messages VALUES (' $convId', '$id', '$text', '', 'NOW()')');
-        $result = pg_query($dbconn, $query);
-    } */
+    // add message to db
+    if(isset($_POST['usermsg'])){
+        $text = $_POST['usermsg'];
+        $text_message = "<div class='msgln'><span class='chat-time'>".date("g:i A")."</span> <b class='user-name'>".'pseudo'."</b> ".stripslashes(htmlspecialchars($text))."<br></div>";
+        // connect to postgres
+        $user = "grp47oxh6hjegww"; 
+        $password = "99yXmThpFno";
+        $host = "esilv.olfsoftware.fr";
+        $port = "5432";
+        $dbname = "pggrp4";
+        $connect = pg_connect("host=$host port=5432 dbname=$dbname user=$user password=$password");
+        if(!$connect){
+            echo "Unable to connect to the database.";
+        }
+        $id = $_GET['id'];
+
+        // check last message id
+        $query = "SELECT id FROM webdev.messages ORDER BY id DESC LIMIT 1";
+        $lastId = pg_query($connect, $query);
+        $lastId = pg_fetch_row($lastId);
+        $lastId = $lastId[0];
+        $lastId = $lastId + 1;
+
+        $time = time();
+        $date = date("Y-m-d H:i:s", $time);
+    
+
+        $query = "INSERT INTO webdev.messages VALUES ('$lastId', '$convId', '$id', '$text', null, '$date')";
+        $newMessages = pg_query($connect, $query);
+    }
+
     
 
 ?>
