@@ -1,0 +1,138 @@
+input[type=text] {
+  font-size: 5px;
+  padding: 1rem 5rem; 
+  border:2px solid rgb(170, 170, 170); 
+  -webkit-border-radius: 5px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+input[type=text]:focus {
+  border-color:rgb(195, 193, 193);
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: small;
+}
+
+input[type=submit] {
+  padding: 3px 10px; 
+  background:#ccc; 
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+  font-size: large;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: large;
+}
+
+
+body{
+background-color: #fafafa;
+padding: 110px 10px 10px 10px;
+font-family: 'Droid Sans', sans-serif;
+}
+
+a{
+text-decoration: none;
+}
+
+#text_conv_area {
+  font-size: 5px;
+  padding:5px; 
+  border:2px solid rgb(170, 170, 170); 
+  -webkit-border-radius: 5px;
+  border-radius: 10px;
+  font-weight: 600;
+  border-color:rgb(195, 193, 193);
+  font-size: small;
+  font-weight: 600;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+
+#menu { 
+  color: #111; 
+  font-family: 'Helvetica Neue', sans-serif; 
+  font-size: 70px; 
+  font-weight: bold; 
+  letter-spacing: -1px; 
+  line-height: 1; 
+  text-align: center; }
+
+#retour_dm_menu{
+  /* create original css for href */
+  color: #111;
+  text-decoration: underline;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: -1px; 
+}
+
+#vous{
+  translate: 250px 0px;
+}
+#lui{
+  translate: -250px 0px;
+}
+
+#titre{
+  color: #111;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 70px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-align: center;
+  translate: -700px 0px;
+}
+
+#mes_convs{
+  color: #111;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-align: left;
+  text-decoration: underline;
+}
+
+#link{
+  border: 1px solid #111;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  width: 250px;
+	padding: 10px;
+	text-align: center;
+	border: 3px dashed #ccc;
+
+}
+
+.profile-image{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #fff;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-user-name{
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  text-align: center;
+  margin-top: 10px;
+}
