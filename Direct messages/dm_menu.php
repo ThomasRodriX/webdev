@@ -4,6 +4,7 @@
     
     <head>
         <meta charset="utf-8">
+        <link href="stylecss.css" rel = "stylesheet" type = "text/css">
         <title> Mes DM </title>
     </head>
     <body>
@@ -36,6 +37,7 @@
 
                     // affichage des conversations
                     if(pg_num_rows($conv) != 0){
+                        echo "<div id=conv_area>"
                         while($row = pg_fetch_row($conv)){
                             if($row[1] == $user_id){
                                 $vousId = $row[1];
@@ -59,6 +61,7 @@
 
                             echo "<li><a href='dm.php?id=".$user_id."&convId=".$row[0]."'>".$username[0]."</a></li>";
                         }
+                        echo"</div>";
                           
                     }
                     else{

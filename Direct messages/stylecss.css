@@ -1,0 +1,31 @@
+body {
+  background-color: white;
+}
+
+p {
+  color: red;
+  text-align: center;
+ 
+}
+
+#text_conv_area {
+  width: 60%;
+  height: 100%;
+  border: 3px solid rgb(40, 39, 39);
+  padding: 5px;
+  font-size: 1.2em;
+  overflow: auto;
+  text-align: center
+}
+
+
+#usermsg {
+  width: 30%;
+  height: 100%;
+  border: 3px solid rgb(40, 39, 39);
+  padding: 5px;
+  font-size: 1.2em;
+  overflow: auto;
+  text-align: center
+}
+

@@ -3,7 +3,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
- 
+        <link href="stylecss.css" rel = "stylesheet" type = "text/css">
         <title>chat DM</title>
         <meta name="description" content="chatbox" />
     </head>
@@ -35,11 +35,12 @@
 	        header('location:dm_menu.php?id='.$user_id);
         }
 
+
     ?>
         <div id="wrapper">
             <div id="menu">
                 <p class="welcome">Heureux de vous revoir, <b><?php echo $user_id; ?></b></p>
-                <p><a id="retour_dm_menu" href="dm_menu.php">Revenir aux conversations</a></p>
+                <p><a id="retour_dm_menu" href="dm_menu.php?id=".$user_id.>Revenir aux conversations</a></p>
             </div>
  
             <div id="chatbox">
@@ -53,6 +54,7 @@
             $oldMessages = pg_query($connect, $query); 
 
             //$sender="";
+            echo "<div id=text_conv_area>";
 	        while ($row = pg_fetch_row($oldMessages)) {
                 $date = $row[5];
                 if($row[2] == $user_id){
@@ -73,16 +75,17 @@
                     $sender = pg_fetch_row($sender);
                     $sender = $sender[0];
                 }
-		        echo "$date |  $sender :  $row[3]";
+		        echo "$date |  <strong>$sender</strong> :  $row[3]";
 		        echo "<br />\n";
             }
+            echo "</div>";
             
             ?>
             
             </div>
  
             <form method="post">
-                <input name="usermsg" type="text" id="usermsg" />
+                <input name="usermsg" type="text" id="usermsg" value=""/>
                 <p><input type="submit" value="Envoyer"></p>
             </form>
         </div>
