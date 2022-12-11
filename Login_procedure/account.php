@@ -56,13 +56,18 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        header {padding-top: 50px;}
+        #logout {padding-top: 9px; padding-left: 6px;}
+        a {cursor: pointer;}
+   </style>
 </head>
 <body>
-    <div class="w3-top">
+<!--     <div class="w3-top">
         <div class="w3-bar w3-left-align w3-large">
           <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large " href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
           <a href="index.php" class="w3-bar-item w3-button w3-padding-large"><i class="fa fa-home w3-margin-right"></i><img src="logo.png" class="w3-circle" style="height:20px;width:39px"></a>
@@ -83,14 +88,48 @@
         </div>
       
 
-      <!-- Navbar on small screens -->
-        <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+      s
+    </div> -->
+    <!-- NavBar -->
+    <div class="navigation">
+        <div class="logo">
+          <a class="no-underline" onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/app.php');" class="navigation-link">
+            Leo Crush
+          </a>
+        </div>
+        <div class="navigation-search-container">
+          <i class="fa fa-search"></i>
+          <input class="search-field" type="text" placeholder="Search">
+          <div class="search-container">
+            <div class="search-container-box">
+              <div class="search-results">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navigation-icons">
+            <a onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/dm.php?id=144&convId=145&fbclid=IwAR2r5gtlCDY-EEcazyf843qMalXi5w5UK0QGEk0Vc6c32vf0_6H610FLgkY');" class="navigation-link">
+                <i class="far fa-envelope icon"></i>
+            </a>
+            <a onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/app.php');" class="navigation-link">
+                <i class="far fa-compass icon"></i>
+            </a>
+            <a onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/profile.php');" class="navigation-link">
+                <i class="far fa-user-circle iconActive"></i>
+            </a>
+          <!-- <a href="https://instagram.com/mimoudix" id="signout" class="navigation-link">
+            <i class="fas fa-sign-out-alt icon"></i>
+          </a> -->
+          <form method="post" id="logout">
+            <input type="submit" name="logout"
+              class="button" value="Logout" 
+            />
+          </form>
         </div>
     </div>
+
+
     <form action="" method="post" class="py-5 my-5">
         <div class="container">
             <h1 class="mb-5">Account Settings</h1>
