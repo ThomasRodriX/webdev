@@ -52,7 +52,7 @@
                 <p><a id="retour_dm_menu" href="dm_menu.php">Revenir au menu</a></p>
             </div>
 
-            <div class="profile-image">
+            <div class="">
 
                 <div style="cursor:pointer;" style class="image-upload">
                     <label style="cursor:pointer;" for="file-input">
