@@ -45,7 +45,6 @@ text-decoration: none;
 
 #text_conv_area {
   font-size: 5px;
-  padding:5px; 
   border:2px solid rgb(170, 170, 170); 
   -webkit-border-radius: 5px;
   border-radius: 10px;
@@ -54,9 +53,9 @@ text-decoration: none;
   font-size: small;
   font-weight: 600;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
+  width: 38rem;
+  padding: 0.5rem 1rem;
+  margin: 0.12rem 0.5rem;
 }
 
 
@@ -70,7 +69,6 @@ text-decoration: none;
   text-align: center; }
 
 #retour_dm_menu{
-  /* create original css for href */
   color: #111;
   text-decoration: underline;
   font-family: 'Helvetica Neue', sans-serif;
@@ -80,10 +78,10 @@ text-decoration: none;
 }
 
 #vous{
-  translate: 250px 0px;
+  translate: 23rem 0rem;
 }
 #lui{
-  translate: -250px 0px;
+  translate: 1rem 0rem;
 }
 
 #titre{
@@ -118,21 +116,111 @@ text-decoration: none;
 
 }
 
-.profile-image{
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 6px solid #fff;
-  margin: auto;
-  position: relative;
-  z-index: 1;
-}
-
 .profile-user-name{
   font-size: 30px;
   font-weight: bold;
   letter-spacing: -1px;
   text-align: center;
   margin-top: 10px;
+}
+
+#lui{
+  display: flex;
+  margin-left: 0.5rem;
+ }
+
+#lui{
+  background: #262626;
+  border-radius: 0.5rem;
+  color: #fff;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin: 0.12rem 0.5rem;
+ }   
+
+#lui {
+  background: linear-gradient(
+  180deg,
+  rgba(139, 47, 184, 1) 0%,
+  rgba(103, 88, 205, 1) 51%,
+  rgba(89, 116, 219, 1) 92%
+  )
+  no-repeat center;
+  background-attachment: fixed;
+  color: #fff;
+  border-radius: 0.5rem;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin: 0.12rem 0.5rem;
+}
+
+#vous {
+  display: flex;
+  margin-left: 0.5rem;
+}
+
+#vous{
+  background: #262626;
+  border-radius: 0.5rem;
+  color: #fff;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin: 0.12rem 0.5rem;
+ }   
+
+#vous{
+  background: linear-gradient(
+  180deg,
+  rgba(139, 47, 184, 1) 0%,
+  rgba(103, 88, 205, 1) 51%,
+  rgba(89, 116, 219, 1) 92%
+  )
+  no-repeat center;
+  background-attachment: fixed;
+  color: #fff;
+  border-radius: 0.5rem;
+  height: fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin: 0.12rem 0.5rem;
+}
+
+.profile-image-left{
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #fff;
+  margin: left;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-image-right{
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #fff;
+  margin: left;
+  position: relative;
+  z-index: 1;
+  translate: 20rem 0rem;
+}
+
+.profile-image{
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #fff;
+  margin: left;
+  position: relative;
+  z-index: 1;
+  translate: 0rem 0rem;
+  margin-left: auto;
+  margin-right: auto;
 }

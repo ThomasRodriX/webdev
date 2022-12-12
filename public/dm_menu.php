@@ -4,7 +4,7 @@
     
     <head>
         <meta charset="utf-8">
-        <link href="./css/stylecss.css" rel = "stylesheet" type = "text/css">
+        <link href="./css/styleDM.css" rel = "stylesheet" type = "text/css">
         <title> Mes DM </title>
     </head>
     <header>
@@ -51,7 +51,7 @@
 
 </header>
     <body>
-        <h1 id=titre> Mes DM </h1>
+        <h1 id=titre></h1>
         <div className="mes_conversations">
           <h2 id=mes_convs>Mes conversations</h2>
             <ul>

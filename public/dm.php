@@ -3,20 +3,11 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
-        <link href="./css/stylecss.css" rel = "stylesheet" type = "text/css">
+        <link href="./css/styleDM.css" rel = "stylesheet" type = "text/css">
         <title>chat DM</title>
         <meta name="description" content="chatbox" />
     </head>
     <body>
-    <div class="profile-image">
-
-        <div style="cursor:pointer;" style class="image-upload">
-            <label style="cursor:pointer;" for="file-input">
-            <img class="picture" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
-            </label>
-            <input style="display:none;" id="file-input" type="file"  accept="image/*" onchange="document.getElementById('picture').src = window.URL.createObjectURL(this.files[0])"/>
-        </div>
-    </div>
 
     <?php
     // connect to postgresql
@@ -59,6 +50,16 @@
             </div>
             <div id="retourMenu">
                 <p><a id="retour_dm_menu" href="dm_menu.php">Revenir au menu</a></p>
+            </div>
+
+            <div class="profile-image">
+
+                <div style="cursor:pointer;" style class="image-upload">
+                    <label style="cursor:pointer;" for="file-input">
+                    <img class="profile-image-left" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://imgs.search.brave.com/ZmTnnHs9GKGcEsxKprbz6nE0lmGEEqwZpDpMShxhnbA/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5u/cXo3aUswN1JEZ2wy/bFdCbXVRaEdnSGFI/YSZwaWQ9QXBp" alt=""><img class="profile-image-right" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+                    </label>
+                    <input style="display:none;" id="file-input" type="file"  accept="image/*" onchange="document.getElementById('picture').src = window.URL.createObjectURL(this.files[0])"/>
+                </div>
             </div>
  
             <div id="chatbox">
