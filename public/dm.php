@@ -4,10 +4,45 @@
     <head>
         <meta charset="utf-8" />
         <link href="./css/styleDM.css" rel = "stylesheet" type = "text/css">
+        <link rel="stylesheet" href="css/navbar.css">
         <title>chat DM</title>
         <meta name="description" content="chatbox" />
     </head>
     <body>
+    <div class="navigation">
+    <div class="logo">
+      <a class="no-underline" href="#">
+        Leo Crush
+      </a>
+    </div>
+    <div class="navigation-search-container">
+      <i class="fa fa-search"></i>
+      <input class="search-field" type="text" placeholder="Search">
+      <div class="search-container">
+        <div class="search-container-box">
+          <div class="search-results">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navigation-icons">
+      <a onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/app.php');" class="navigation-link">
+        <i class="far fa-compass iconActive"></i>
+      </a>
+      <a onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/profile.php');" class="navigation-link">
+        <i class="far fa-user-circle icon"></i>
+      </a>
+      <!-- <a href="https://instagram.com/mimoudix" id="signout" class="navigation-link">
+        <i class="fas fa-sign-out-alt icon"></i>
+      </a> -->
+      <form method="post">
+        <input type="submit" name="logout"
+          class="button" value="Logout" 
+        />
+      </form>
+    </div>
+  </div>
 
     <?php
     // connect to postgresql
@@ -56,7 +91,7 @@
 
                 <div style="cursor:pointer;" style class="image-upload">
                     <label style="cursor:pointer;" for="file-input">
-                    <img class="profile-image-left" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://imgs.search.brave.com/ZmTnnHs9GKGcEsxKprbz6nE0lmGEEqwZpDpMShxhnbA/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5u/cXo3aUswN1JEZ2wy/bFdCbXVRaEdnSGFI/YSZwaWQ9QXBp" alt=""><img class="profile-image-right" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+                    <img class="profile-image-left" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://imgs.search.brave.com/e6dWgupmtPq1AxT6xf0CYeqybta_lGP53Hj-hgj4ZKI/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5t/MnZUUy1oc1JPc29a/VnlfRnBiY3hBSGFF/OCZwaWQ9QXBp" alt=""><img class="profile-image-right" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
                     </label>
                     <input style="display:none;" id="file-input" type="file"  accept="image/*" onchange="document.getElementById('picture').src = window.URL.createObjectURL(this.files[0])"/>
                 </div>

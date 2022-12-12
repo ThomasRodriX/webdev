@@ -5,9 +5,45 @@
     <head>
         <meta charset="utf-8">
         <link href="./css/styleDM.css" rel = "stylesheet" type = "text/css">
+        <link rel="stylesheet" href="css/navbar.css">
         <title> Mes DM </title>
     </head>
     <header>
+
+    <div class="navigation">
+    <div class="logo">
+      <a class="no-underline" href="#">
+        Leo Crush
+      </a>
+    </div>
+    <div class="navigation-search-container">
+      <i class="fa fa-search"></i>
+      <input class="search-field" type="text" placeholder="Search">
+      <div class="search-container">
+        <div class="search-container-box">
+          <div class="search-results">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navigation-icons">
+      <a onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/app.php');" class="navigation-link">
+        <i class="far fa-compass iconActive"></i>
+      </a>
+      <a onclick="var url = window.location.toString(); window.location.href = url.replace(/\/[^\/]*$/, '/profile.php');" class="navigation-link">
+        <i class="far fa-user-circle icon"></i>
+      </a>
+      <!-- <a href="https://instagram.com/mimoudix" id="signout" class="navigation-link">
+        <i class="fas fa-sign-out-alt icon"></i>
+      </a> -->
+      <form method="post">
+        <input type="submit" name="logout"
+          class="button" value="Logout" 
+        />
+      </form>
+    </div>
+  </div>
 
 	<div class="container">
 
