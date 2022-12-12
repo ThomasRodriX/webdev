@@ -8,6 +8,16 @@
         <meta name="description" content="chatbox" />
     </head>
     <body>
+    <div class="profile-image">
+
+        <div style="cursor:pointer;" style class="image-upload">
+            <label style="cursor:pointer;" for="file-input">
+            <img class="picture" id="picture" style="cursor:pointer;"onClick="onFileSelected()" src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+            </label>
+            <input style="display:none;" id="file-input" type="file"  accept="image/*" onchange="document.getElementById('picture').src = window.URL.createObjectURL(this.files[0])"/>
+        </div>
+    </div>
+
     <?php
     // connect to postgresql
     $user = "grp47oxh6hjegww"; 
