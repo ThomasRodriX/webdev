@@ -139,6 +139,8 @@
                             $username = pg_fetch_row($username);
 
                             echo "<li><a id=link href='dm.php?id=".$user_id."&convId=".$row[0]."'>".$username[0]."</a></li>";
+                            echo "<p style='margin-top: 20px;'>...</p>";
+                            echo "<p style='margin-top: 20px;'>...</p>";
                         }
                         echo"</div>";
                           
